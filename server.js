@@ -1,5 +1,9 @@
 // Loads express
 const express = require("express")
+//import the dataBase
+const getData = require("./models/pokemon");
+//call getData
+const pokemon = getData;
 
 // create an instance of express
 const app = express();
@@ -10,8 +14,10 @@ app.get('/', (req, res) => {
     res.send('Welcome to the Pokemon App!'); 
 })
 
-
-
+//  '/pokemon' route
+app.get('/pokemon', (req, res) => {
+    res.send(pokemon)
+})
 
 
 
