@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 //JSON Middleware
 app.use(express.json())
 //if we don't need to read data from the url.
-app.use(express.urlencoded({extend: false}))
+app.use(express.urlencoded({extended: false}))
 
 //Setup view engine
 app.set("view engine", "ejs");
@@ -31,7 +31,33 @@ app.get('/', (req, res) => {
 
 //  '/pokemon' route   
 app.get("/pokemon", (req, res) => {
-    res.render("index", { data: pokemon, pageTitle: "Pokemon Page" })
+    res.render("Index", { 
+        
+        pageTitle: "Pokemon Page", 
+        pageHeader: "See All The Pokemon!",
+        pokemonData: pokemon
+    })
+})
+
+app.get('/pokemon/new', (req, res) => {
+    res.render("new", {
+        pageTitle: "New Pokemon",
+        pageHeader: "Create a new Pokemon"
+    })
+})
+
+
+app.post('/pokemon', (req,res) => {
+    console.log(req.body)
+})
+app.get('/pokemon/:id', (req, res) => {
+  //  res.send(req.params.id)
+  
+  res.render('Show', {
+        pageTitle: "Details",
+        pageHeader: "Gotta Catch 'Em All",
+        pokemon: pokemon[req.params.id] 
+    })
 })
 
 
